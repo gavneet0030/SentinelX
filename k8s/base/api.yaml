@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sentinelx-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sentinelx-api
+  template:
+    metadata:
+      labels:
+        app: sentinelx-api
+    spec:
+      containers:
+        - name: sentinelx-api
+          image: sentinelx:latest
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8000
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sentinelx-api
+spec:
+  selector:
+    app: sentinelx-api
+  ports:
+    - port: 8000
+      targetPort: 8000

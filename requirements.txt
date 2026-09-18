@@ -1,0 +1,58 @@
+# Core API
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+
+# Data
+pandas
+numpy
+polars
+pyarrow
+duckdb
+
+# Machine Learning
+scikit-learn
+xgboost
+lightgbm
+shap
+mlflow
+
+# Graph
+networkx
+
+# Database
+sqlalchemy
+psycopg[binary]
+redis
+
+# Streaming
+kafka-python-ng
+
+# HTTP
+httpx
+
+# Configuration
+python-dotenv
+pyyaml
+
+# Validation
+pandera
+
+# Testing
+pytest
+pytest-cov
+pytest-asyncio
+
+# Load testing
+locust
+
+# Observability
+prometheus-client
+opentelemetry-api
+opentelemetry-sdk
+
+# Utilities
+orjson
+rich
+typer

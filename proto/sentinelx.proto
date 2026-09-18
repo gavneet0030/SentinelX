@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package sentinelx;
+
+message TransactionEvent {
+  string event_id = 1;
+  string customer_id = 2;
+  string merchant_id = 3;
+  string device_id = 4;
+  double amount = 5;
+  string timestamp = 6;
+  string location = 7;
+}
+
+message RiskResponse {
+  string event_id = 1;
+  double risk_score = 2;
+  string decision = 3;
+  string model_version = 4;
+}
+
+service RiskService {
+  rpc ScoreTransaction(TransactionEvent) returns (RiskResponse);
+}

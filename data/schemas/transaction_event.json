@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "entity": "transaction_event",
+  "fields": {
+    "event_id": "string",
+    "customer_id": "string|null",
+    "merchant_id": "string|null",
+    "device_id": "string|null",
+    "amount": "float",
+    "timestamp": "datetime",
+    "location": "string|null"
+  }
+}

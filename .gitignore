@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data
+data/raw/*
+data/processed/*
+data/external/*
+data/synthetic/*
+data/quarantine/*
+
+# Model artifacts
+src/models/artifacts/*
+*.pkl
+*.joblib
+*.onnx
+
+# Runtime
+logs/*
+runtime/*
+!logs/.gitkeep
+!runtime/.gitkeep
+
+# Reports generated locally
+reports/figures/*
+reports/tables/*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker/*.log
+
+# MLflow
+mlruns/
+
+# Secrets
+*.pem
+*.key
+*.crt
+secrets/
