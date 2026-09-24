@@ -1,0 +1,39 @@
+﻿services:
+
+  redis:
+
+    image: redis:8-alpine
+
+    container_name: sentinelx-redis
+
+    ports:
+      - "6380:6379"
+
+    command:
+      - redis-server
+      - --appendonly
+      - yes
+
+    volumes:
+      - sentinelx_redis_data:/data
+
+    healthcheck:
+
+      test:
+        [
+          "CMD",
+          "redis-cli",
+          "ping"
+        ]
+
+      interval: 5s
+
+      timeout: 3s
+
+      retries: 10
+
+
+volumes:
+
+  sentinelx_redis_data:
+

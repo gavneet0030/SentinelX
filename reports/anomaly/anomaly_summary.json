@@ -1,0 +1,242 @@
+{
+  "dataset": {
+    "input": "C:\\Users\\PC\\SentinelX\\data\\processed\\transactions.parquet",
+    "rows": 10000
+  },
+  "model": {
+    "algorithm": "IsolationForest",
+    "n_estimators": 300,
+    "contamination": 0.03,
+    "random_state": 42
+  },
+  "features": {
+    "count": 25,
+    "columns": [
+      "amount",
+      "amount_log1p",
+      "amount_is_large",
+      "hour",
+      "day_of_week",
+      "is_weekend",
+      "is_night",
+      "customer_previous_count",
+      "customer_previous_amount_sum",
+      "customer_previous_amount_mean",
+      "customer_previous_amount",
+      "amount_vs_previous",
+      "amount_vs_customer_mean",
+      "seconds_since_previous",
+      "customer_velocity_1h",
+      "customer_velocity_24h",
+      "device_previous_count",
+      "device_new_for_customer",
+      "merchant_previous_count",
+      "payment_method_code",
+      "channel_code",
+      "country_code",
+      "customer_amount_deviation",
+      "customer_amount_deviation_abs",
+      "customer_history_exists"
+    ]
+  },
+  "chronological_split": {
+    "training_rows": 7000,
+    "evaluation_rows": 3000,
+    "training_fraction": 0.7
+  },
+  "anomaly_distribution": {
+    "NORMAL": 9883,
+    "REVIEW": 103,
+    "CRITICAL": 14
+  },
+  "score_statistics": {
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.24609832380388624,
+    "median": 0.2154445062111328,
+    "p95": 0.5359114854008101,
+    "p99": 0.7166597159129774
+  },
+  "top_anomalies": [
+    {
+      "transaction_id": "txn_00008405_7274249b",
+      "customer_id": "customer_00548",
+      "merchant_id": "merchant_003",
+      "timestamp": "2026-01-17T08:40:11+00:00",
+      "amount": 2087.64,
+      "anomaly_score": 1.0,
+      "anomaly_decision": "CRITICAL"
+    },
+    {
+      "transaction_id": "txn_00003637_66230cc3",
+      "customer_id": "customer_01532",
+      "merchant_id": "merchant_013",
+      "timestamp": "2026-01-03T14:20:49+00:00",
+      "amount": 2252.58,
+      "anomaly_score": 0.9885534434681761,
+      "anomaly_decision": "CRITICAL"
+    },
+    {
+      "transaction_id": "txn_00008515_dfa0be3d",
+      "customer_id": "customer_01638",
+      "merchant_id": "merchant_009",
+      "timestamp": "2026-01-22T05:27:25+00:00",
+      "amount": 738.79,
+      "anomaly_score": 0.9874700649113577,
+      "anomaly_decision": "CRITICAL"
+    },
+    {
+      "transaction_id": "txn_00006059_115663fd",
+      "customer_id": "customer_00143",
+      "merchant_id": "merchant_011",
+      "timestamp": "2026-01-04T02:15:46+00:00",
+      "amount": 947.03,
+      "anomaly_score": 0.9660085013386003,
+      "anomaly_decision": "CRITICAL"
+    },
+    {
+      "transaction_id": "txn_00000982_7b8d8c1e",
+      "customer_id": "customer_00761",
+      "merchant_id": "merchant_014",
+      "timestamp": "2026-01-04T11:10:44+00:00",
+      "amount": 852.67,
+      "anomaly_score": 0.9447708732937526,
+      "anomaly_decision": "CRITICAL"
+    },
+    {
+      "transaction_id": "txn_00009205_b1817a7e",
+      "customer_id": "customer_00508",
+      "merchant_id": "merchant_002",
+      "timestamp": "2026-01-23T03:20:11+00:00",
+      "amount": 727.57,
+      "anomaly_score": 0.9353913054227188,
+      "anomaly_decision": "CRITICAL"
+    },
+    {
+      "transaction_id": "txn_00006024_12bf24d9",
+      "customer_id": "customer_00196",
+      "merchant_id": "merchant_015",
+      "timestamp": "2026-01-30T15:19:48+00:00",
+      "amount": 1352.97,
+      "anomaly_score": 0.9341188559615856,
+      "anomaly_decision": "CRITICAL"
+    },
+    {
+      "transaction_id": "txn_00002446_f8c5c651",
+      "customer_id": "customer_01930",
+      "merchant_id": "merchant_014",
+      "timestamp": "2026-01-24T13:01:03+00:00",
+      "amount": 1103.62,
+      "anomaly_score": 0.9336993988282312,
+      "anomaly_decision": "CRITICAL"
+    },
+    {
+      "transaction_id": "txn_00006440_ae296536",
+      "customer_id": "customer_01173",
+      "merchant_id": "merchant_020",
+      "timestamp": "2026-01-19T12:03:47+00:00",
+      "amount": 737.36,
+      "anomaly_score": 0.9301685823358301,
+      "anomaly_decision": "CRITICAL"
+    },
+    {
+      "transaction_id": "txn_00008762_44dd421a",
+      "customer_id": "customer_01346",
+      "merchant_id": "merchant_020",
+      "timestamp": "2026-01-27T18:58:29+00:00",
+      "amount": 2605.4,
+      "anomaly_score": 0.9268523187587236,
+      "anomaly_decision": "CRITICAL"
+    },
+    {
+      "transaction_id": "txn_00007771_87c96980",
+      "customer_id": "customer_01385",
+      "merchant_id": "merchant_004",
+      "timestamp": "2026-01-08T00:05:53+00:00",
+      "amount": 1172.21,
+      "anomaly_score": 0.922379216703801,
+      "anomaly_decision": "CRITICAL"
+    },
+    {
+      "transaction_id": "txn_00005697_ae8b743e",
+      "customer_id": "customer_00409",
+      "merchant_id": "merchant_012",
+      "timestamp": "2026-01-28T21:46:54+00:00",
+      "amount": 987.38,
+      "anomaly_score": 0.9194583452577086,
+      "anomaly_decision": "CRITICAL"
+    },
+    {
+      "transaction_id": "txn_00007469_9fea30f2",
+      "customer_id": "customer_01633",
+      "merchant_id": "merchant_001",
+      "timestamp": "2026-01-04T23:36:08+00:00",
+      "amount": 506.12,
+      "anomaly_score": 0.9167619929580327,
+      "anomaly_decision": "CRITICAL"
+    },
+    {
+      "transaction_id": "txn_00009513_36f4693f",
+      "customer_id": "customer_00459",
+      "merchant_id": "merchant_011",
+      "timestamp": "2026-01-09T20:27:36+00:00",
+      "amount": 1755.04,
+      "anomaly_score": 0.9147661020118651,
+      "anomaly_decision": "CRITICAL"
+    },
+    {
+      "transaction_id": "txn_00009948_fa7f4a44",
+      "customer_id": "customer_00866",
+      "merchant_id": "merchant_009",
+      "timestamp": "2026-01-10T09:44:28+00:00",
+      "amount": 438.58,
+      "anomaly_score": 0.885702079470576,
+      "anomaly_decision": "REVIEW"
+    },
+    {
+      "transaction_id": "txn_00000941_12f57080",
+      "customer_id": "customer_00420",
+      "merchant_id": "merchant_017",
+      "timestamp": "2026-01-07T23:56:56+00:00",
+      "amount": 856.73,
+      "anomaly_score": 0.8801017529624087,
+      "anomaly_decision": "REVIEW"
+    },
+    {
+      "transaction_id": "txn_00002845_b2342822",
+      "customer_id": "customer_01222",
+      "merchant_id": "merchant_020",
+      "timestamp": "2026-01-13T11:37:33+00:00",
+      "amount": 1230.22,
+      "anomaly_score": 0.8794748726510052,
+      "anomaly_decision": "REVIEW"
+    },
+    {
+      "transaction_id": "txn_00007813_17ac5bc4",
+      "customer_id": "customer_01163",
+      "merchant_id": "merchant_005",
+      "timestamp": "2026-01-26T13:15:23+00:00",
+      "amount": 893.74,
+      "anomaly_score": 0.877842439798459,
+      "anomaly_decision": "REVIEW"
+    },
+    {
+      "transaction_id": "txn_00002122_dffbf242",
+      "customer_id": "customer_00773",
+      "merchant_id": "merchant_015",
+      "timestamp": "2026-01-23T07:33:56+00:00",
+      "amount": 693.38,
+      "anomaly_score": 0.8710706261554484,
+      "anomaly_decision": "REVIEW"
+    },
+    {
+      "transaction_id": "txn_00000692_a7116b18",
+      "customer_id": "customer_00503",
+      "merchant_id": "merchant_018",
+      "timestamp": "2026-01-21T13:42:26+00:00",
+      "amount": 613.41,
+      "anomaly_score": 0.8679213491921396,
+      "anomaly_decision": "REVIEW"
+    }
+  ]
+}

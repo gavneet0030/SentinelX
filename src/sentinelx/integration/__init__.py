@@ -1,0 +1,1 @@
+﻿"""SentinelX signal integration layer."""

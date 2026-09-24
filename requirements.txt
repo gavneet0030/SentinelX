@@ -1,8 +1,12 @@
-# Core API
+# ============================================================
+# SentinelX Python Dependencies
+# ============================================================
+
+# API
 fastapi
 uvicorn[standard]
-pydantic
-pydantic-settings
+pydantic>=2,<3
+pydantic-settings>=2,<3
 
 # Data
 pandas
@@ -16,6 +20,8 @@ scikit-learn
 xgboost
 lightgbm
 shap
+
+# Experiment / Model Management
 mlflow
 
 # Graph
@@ -36,7 +42,7 @@ httpx
 python-dotenv
 pyyaml
 
-# Validation
+# Data Validation
 pandera
 
 # Testing
@@ -44,7 +50,7 @@ pytest
 pytest-cov
 pytest-asyncio
 
-# Load testing
+# Load Testing
 locust
 
 # Observability

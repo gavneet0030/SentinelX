@@ -1,0 +1,30 @@
+{
+  "dataset": "C:\\Users\\PC\\SentinelX\\data\\processed\\transactions.parquet",
+  "total_rows": 10000,
+  "train_rows": 7000,
+  "validation_rows": 1500,
+  "test_rows": 1500,
+  "feature_count": 12,
+  "numeric_features": [
+    "amount",
+    "log_amount",
+    "hour",
+    "day_of_week",
+    "is_weekend",
+    "customer_txn_count_prior",
+    "customer_avg_amount_prior",
+    "merchant_txn_count_prior",
+    "device_txn_count_prior"
+  ],
+  "categorical_features": [
+    "payment_method",
+    "channel",
+    "country"
+  ],
+  "split_method": "chronological",
+  "train_ratio": 0.7,
+  "validation_ratio": 0.15,
+  "test_ratio": 0.15,
+  "random_seed": 42,
+  "note": "Metrics are measured on the synthetic development dataset and are not real-world fraud detection claims."
+}

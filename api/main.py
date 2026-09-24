@@ -1,33 +1,30 @@
-from fastapi import FastAPI
+﻿from fastapi import FastAPI
 
+from api.routes.health import router as health_router
 from api.routes.transactions import router as transaction_router
 from api.routes.risk import router as risk_router
 from api.routes.alerts import router as alerts_router
+from api.routes.model import router as model_router
 
 
-def create_app() -> FastAPI:
-
-    application = FastAPI(
-        title="SentinelX",
-        description=(
-            "Real-Time Explainable Risk & "
-            "Anomaly Intelligence Platform"
-        ),
-        version="0.1.0",
-    )
-
-    application.include_router(transaction_router)
-    application.include_router(risk_router)
-    application.include_router(alerts_router)
-
-    @application.get("/health")
-    def health():
-        return {
-            "status": "ok",
-            "service": "sentinelx-api",
-        }
-
-    return application
+app = FastAPI(
+    title="SentinelX",
+    description="Real-Time Explainable Risk & Anomaly Intelligence Platform",
+    version="0.1.0",
+)
 
 
-app = create_app()
+app.include_router(health_router)
+app.include_router(transaction_router)
+app.include_router(risk_router)
+app.include_router(alerts_router)
+app.include_router(model_router)
+
+
+@app.get("/")
+def root():
+    return {
+        "service": "SentinelX",
+        "version": "0.1.0",
+        "status": "operational",
+    }

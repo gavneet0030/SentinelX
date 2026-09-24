@@ -1,4 +1,10 @@
-from fastapi import APIRouter
+﻿from fastapi import APIRouter
+
+from api.schemas.transaction import TransactionRequest
+from api.services.transaction_state import (
+    TransactionStateService,
+)
+
 
 router = APIRouter(
     prefix="/transactions",
@@ -6,10 +12,14 @@ router = APIRouter(
 )
 
 
-@router.post("")
-def submit_transaction():
+state_service = TransactionStateService()
 
-    return {
-        "status": "accepted",
-        "message": "Transaction ingestion endpoint initialized.",
-    }
+
+@router.post("")
+def submit_transaction(
+    transaction: TransactionRequest,
+):
+
+    return state_service.process(
+        transaction
+    )
