@@ -12,14 +12,11 @@ def prepare_risk_context(df):
     for column in [
         "fraud_probability",
         "behavioral_risk",
-        "anomaly_score"
+        "anomaly_score",
     ]:
-
+        source = data[column] if column in data.columns else pd.Series(0, index=data.index)
         data[column] = (
-            pd.to_numeric(
-                data[column],
-                errors="coerce"
-            )
+            pd.to_numeric(source, errors="coerce")
             .fillna(0)
             .clip(0, 100)
         )

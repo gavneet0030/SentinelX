@@ -1,14 +1,15 @@
-﻿from fastapi.testclient import TestClient
+﻿import uuid
+
+from fastapi.testclient import TestClient
 
 from api.main import app
-
 
 client = TestClient(app)
 
 
 def test_transaction_redis_integration():
 
-    transaction_id = "redis_api_test_001"
+    transaction_id = f"redis_api_test_{uuid.uuid4().hex}"
 
     payload = {
         "transaction_id": transaction_id,
@@ -40,7 +41,7 @@ def test_transaction_redis_integration():
 
 def test_duplicate_transaction():
 
-    transaction_id = "redis_api_duplicate_001"
+    transaction_id = f"redis_api_duplicate_{uuid.uuid4().hex}"
 
     payload = {
         "transaction_id": transaction_id,

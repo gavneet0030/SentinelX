@@ -1,0 +1,63 @@
+{
+  "model": "transaction_temporal",
+  "threshold": 0.5,
+  "sample_count": 1500,
+  "positive_count": 48,
+  "negative_count": 1452,
+  "fraud_rate": 0.032,
+  "precision": 0.05947136563876652,
+  "recall": 0.5625,
+  "f1": 0.10756972111553785,
+  "roc_auc": 0.720313934802571,
+  "pr_auc": 0.111560041247135,
+  "confusion_matrix": [
+    [
+      1025,
+      427
+    ],
+    [
+      21,
+      27
+    ]
+  ],
+  "classification_report": {
+    "False": {
+      "precision": 0.9799235181644359,
+      "recall": 0.7059228650137741,
+      "f1-score": 0.8206565252201762,
+      "support": 1452.0
+    },
+    "True": {
+      "precision": 0.05947136563876652,
+      "recall": 0.5625,
+      "f1-score": 0.10756972111553785,
+      "support": 48.0
+    },
+    "accuracy": 0.7013333333333334,
+    "macro avg": {
+      "precision": 0.5196974419016012,
+      "recall": 0.634211432506887,
+      "f1-score": 0.464113123167857,
+      "support": 1500.0
+    },
+    "weighted avg": {
+      "precision": 0.9504690492836145,
+      "recall": 0.7013333333333334,
+      "f1-score": 0.7978377474888279,
+      "support": 1500.0
+    }
+  },
+  "evaluation_call_seconds": 0.33925859999726526,
+  "feature_count": 8,
+  "features": [
+    "amount",
+    "log_amount",
+    "hour",
+    "day_of_week",
+    "is_weekend",
+    "payment_method",
+    "channel",
+    "country"
+  ],
+  "selected_threshold_from_validation": 0.5
+}

@@ -5,7 +5,7 @@ from sqlalchemy.orm import DeclarativeBase, sessionmaker
 DATABASE_URL = (
     "postgresql+psycopg://"
     "sentinelx:sentinelx_dev_password"
-    "@localhost:5433/sentinelx"
+    "@localhost:5434/sentinelx"
 )
 
 

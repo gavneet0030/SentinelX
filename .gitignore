@@ -61,3 +61,8 @@ mlruns/
 *.key
 *.crt
 secrets/
+
+# Generated backups and packaging metadata
+*.bak
+*.backup-*
+*.egg-info/

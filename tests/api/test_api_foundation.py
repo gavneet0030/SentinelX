@@ -1,7 +1,8 @@
-﻿from fastapi.testclient import TestClient
+﻿import uuid
+
+from fastapi.testclient import TestClient
 
 from api.main import app
-
 
 client = TestClient(app)
 
@@ -25,7 +26,7 @@ def test_model_info():
 
 def test_transaction():
     payload = {
-        "transaction_id": "tx_test_001",
+        "transaction_id": f"tx_test_{uuid.uuid4().hex}",
         "customer_id": "cust_001",
         "merchant_id": "merchant_001",
         "timestamp": "2026-01-01T12:00:00Z",

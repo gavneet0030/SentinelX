@@ -215,3 +215,72 @@ def test_anomaly_output_contains_required_fields():
     assert required.issubset(
         output.columns
     )
+
+def test_device_and_merchant_history_follow_timestamp_order():
+    df = make_test_data()
+    df["customer_id"] = [
+        "C001" if i % 2 == 0 else "C002"
+        for i in range(len(df))
+    ]
+    df["device_id"] = "D_SHARED"
+    df["merchant_id"] = "M_SHARED"
+    df = df.iloc[::-1].reset_index(drop=True)
+
+    result = build_anomaly_features(df).frame
+    result = result.sort_values("timestamp").reset_index(drop=True)
+
+    expected_counts = np.arange(len(df))
+    np.testing.assert_array_equal(
+        result["device_previous_count"].to_numpy(),
+        expected_counts,
+    )
+    np.testing.assert_array_equal(
+        result["merchant_previous_count"].to_numpy(),
+        expected_counts,
+    )
+
+
+def test_history_features_do_not_change_when_future_rows_are_added():
+    df = make_test_data()
+    df["customer_id"] = [
+        "C001" if i % 2 == 0 else "C002"
+        for i in range(len(df))
+    ]
+    df["device_id"] = "D_SHARED"
+    df["merchant_id"] = "M_SHARED"
+
+    earlier = df.iloc[:15].copy()
+    full = df.copy()
+
+    earlier_result = build_anomaly_features(earlier).frame
+    full_result = build_anomaly_features(full).frame
+
+    columns = ["device_previous_count", "merchant_previous_count"]
+    left = earlier_result.set_index("transaction_id")[columns].sort_index()
+    right = (
+        full_result.set_index("transaction_id")
+        .loc[left.index, columns]
+        .sort_index()
+    )
+    pd.testing.assert_frame_equal(left, right)
+
+
+def test_amount_threshold_does_not_depend_on_future_rows():
+    df = make_test_data()
+
+    earlier = df.iloc[:15].copy()
+    full = df.copy()
+
+    earlier_result = build_anomaly_features(earlier).frame
+    full_result = build_anomaly_features(full).frame
+
+    left = (
+        earlier_result.set_index("transaction_id")["amount_is_large"]
+        .sort_index()
+    )
+    right = (
+        full_result.set_index("transaction_id")
+        .loc[left.index, "amount_is_large"]
+        .sort_index()
+    )
+    pd.testing.assert_series_equal(left, right)

@@ -9,6 +9,11 @@ def sample_data():
     return pd.DataFrame(
         {
             "transaction_id": ["t1", "t2", "t3"],
+            "timestamp": [
+                "2026-10-01T10:00:00Z",
+                "2026-10-01T10:01:00Z",
+                "2026-10-01T10:02:00Z",
+            ],
             "customer_id": ["c1", "c1", "c2"],
             "merchant_id": ["m1", "m2", "m1"],
             "device_id": ["d1", "d1", "d2"],
@@ -43,3 +48,56 @@ def test_graph_features_build():
     assert "shared_merchant" in result.columns
 
     assert result["graph_risk_score"].between(0, 100).all()
+
+def test_same_timestamp_transactions_do_not_influence_each_other():
+    frame = pd.DataFrame(
+        {
+            "transaction_id": ["t1", "t2", "t3"],
+            "timestamp": [
+                "2026-10-01T10:00:00Z",
+                "2026-10-01T10:00:00Z",
+                "2026-10-01T10:01:00Z",
+            ],
+            "customer_id": ["c1", "c2", "c3"],
+            "merchant_id": ["m1", "m1", "m2"],
+            "device_id": ["d1", "d1", "d1"],
+        }
+    )
+
+    result = build_graph_features(frame).set_index("transaction_id")
+
+    # Both simultaneous transactions must see the graph as it existed
+    # before either transaction occurred.
+    assert result.loc["t1", "device_customer_degree"] == 0
+    assert result.loc["t2", "device_customer_degree"] == 0
+    assert result.loc["t1", "shared_device"] == 0
+    assert result.loc["t2", "shared_device"] == 0
+
+    # The later transaction can see both earlier customers.
+    assert result.loc["t3", "device_customer_degree"] == 2
+    assert result.loc["t3", "shared_device"] == 1
+
+
+def test_graph_features_are_independent_of_input_order_for_timestamp_ties():
+    frame = pd.DataFrame(
+        {
+            "transaction_id": ["t2", "t1", "t3"],
+            "timestamp": [
+                "2026-10-01T10:00:00Z",
+                "2026-10-01T10:00:00Z",
+                "2026-10-01T10:01:00Z",
+            ],
+            "customer_id": ["c2", "c1", "c3"],
+            "merchant_id": ["m1", "m1", "m2"],
+            "device_id": ["d1", "d1", "d1"],
+        }
+    )
+
+    first = build_graph_features(frame).sort_values("transaction_id").reset_index(drop=True)
+    second = (
+        build_graph_features(frame.sample(frac=1, random_state=42))
+        .sort_values("transaction_id")
+        .reset_index(drop=True)
+    )
+
+    pd.testing.assert_frame_equal(first, second)

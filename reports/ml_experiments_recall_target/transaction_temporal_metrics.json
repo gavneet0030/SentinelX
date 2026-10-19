@@ -1,0 +1,52 @@
+{
+  "model": "transaction_temporal",
+  "threshold": 0.7,
+  "sample_count": 1500,
+  "positive_count": 48,
+  "negative_count": 1452,
+  "fraud_rate": 0.032,
+  "precision": 0.1,
+  "recall": 0.3541666666666667,
+  "f1": 0.1559633027522936,
+  "roc_auc": 0.7202421946740128,
+  "pr_auc": 0.11150476804514961,
+  "confusion_matrix": [
+    [
+      1299,
+      153
+    ],
+    [
+      31,
+      17
+    ]
+  ],
+  "classification_report": {
+    "0": {
+      "precision": 0.9766917293233083,
+      "recall": 0.8946280991735537,
+      "f1-score": 0.9338605319913731,
+      "support": 1452.0
+    },
+    "1": {
+      "precision": 0.1,
+      "recall": 0.3541666666666667,
+      "f1-score": 0.1559633027522936,
+      "support": 48.0
+    },
+    "accuracy": 0.8773333333333333,
+    "macro avg": {
+      "precision": 0.5383458646616541,
+      "recall": 0.6243973829201102,
+      "f1-score": 0.5449119173718333,
+      "support": 1500.0
+    },
+    "weighted avg": {
+      "precision": 0.9486375939849624,
+      "recall": 0.8773333333333333,
+      "f1-score": 0.9089678206557225,
+      "support": 1500.0
+    }
+  },
+  "feature_count": 8,
+  "evaluation_call_seconds": 0.10972030000084487
+}

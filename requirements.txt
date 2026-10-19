@@ -34,6 +34,7 @@ redis
 
 # Streaming
 kafka-python-ng
+confluent-kafka
 
 # HTTP
 httpx

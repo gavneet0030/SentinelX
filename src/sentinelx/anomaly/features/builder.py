@@ -1,4 +1,4 @@
-"""Point-in-time-safe anomaly feature construction."""
+﻿"""Point-in-time-safe anomaly feature construction."""
 
 from __future__ import annotations
 
@@ -73,8 +73,11 @@ def build_anomaly_features(df: pd.DataFrame) -> AnomalyFeatureResult:
         work["amount"].clip(lower=0)
     )
 
+    # Use a fixed threshold so feature values do not depend on future rows.
+    # This is a configurable heuristic, not a fitted training-set statistic.
+    amount_large_threshold = 200.0
     work["amount_is_large"] = (
-        work["amount"] > work["amount"].quantile(0.95)
+        work["amount"] > amount_large_threshold
     ).astype(int)
 
     work["hour"] = work["timestamp"].dt.hour
@@ -190,6 +193,11 @@ def build_anomaly_features(df: pd.DataFrame) -> AnomalyFeatureResult:
         work.loc[group.index, "customer_velocity_24h"] = values_24h
 
     # --------------------------------------------------------
+    # Ensure device and merchant history is calculated in event-time order.
+    work = work.sort_values(
+        ["timestamp", "transaction_id"]
+    ).reset_index(drop=True)
+
     # Device history
     # --------------------------------------------------------
 
