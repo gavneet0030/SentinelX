@@ -101,3 +101,49 @@ def test_graph_features_are_independent_of_input_order_for_timestamp_ties():
     )
 
     pd.testing.assert_frame_equal(first, second)
+
+
+def test_future_transactions_do_not_change_earlier_graph_features():
+    historical = pd.DataFrame(
+        {
+            "transaction_id": ["t1", "t2"],
+            "timestamp": [
+                "2026-10-01T10:00:00Z",
+                "2026-10-01T10:01:00Z",
+            ],
+            "customer_id": ["c1", "c2"],
+            "merchant_id": ["m1", "m2"],
+            "device_id": ["d1", "d1"],
+        }
+    )
+
+    future = pd.DataFrame(
+        {
+            "transaction_id": ["t3", "t4"],
+            "timestamp": [
+                "2026-10-02T10:00:00Z",
+                "2026-10-02T10:01:00Z",
+            ],
+            "customer_id": ["c3", "c1"],
+            "merchant_id": ["m3", "m4"],
+            "device_id": ["d1", "d9"],
+        }
+    )
+
+    historical_features = (
+        build_graph_features(historical)
+        .set_index("transaction_id")
+        .sort_index()
+    )
+
+    combined_features = (
+        build_graph_features(pd.concat([historical, future], ignore_index=True))
+        .set_index("transaction_id")
+        .sort_index()
+        .loc[historical_features.index]
+    )
+
+    pd.testing.assert_frame_equal(
+        historical_features,
+        combined_features,
+    )
