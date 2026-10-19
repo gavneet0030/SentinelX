@@ -66,3 +66,14 @@ secrets/
 *.bak
 *.backup-*
 *.egg-info/
+
+# Local diagnostic logs and verification output
+kafka-thread-dump.txt
+sentinelx_db_test_results.txt
+sentinelx_verification_report.txt
+reports/ml_experiments*_run.log
+
+# Local recovery backups
+*.backup_*
+*.recall-backup
+*.validation-metrics-backup
